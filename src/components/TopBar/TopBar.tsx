@@ -34,7 +34,13 @@ const TopBar = () => {
 
   return (
     <div className="topbar-section">
-      <img src={logo} alt="S&S Logo" title="S&S Logo" />
+      <img
+        src={logo}
+        alt="S&S Logo"
+        width="80px"
+        height="80px"
+        title="S&S Logo"
+      />
       <div className="options">
         <span className="add-doc-btn" title="Modify Stoplist">
           <Pen /> <p>StopList</p>{' '}
