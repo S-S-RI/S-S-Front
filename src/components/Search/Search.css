@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+  gap: 10px;
 }
 .search-section h1 {
   font-family: Arial, sans-serif;
@@ -56,4 +57,43 @@
 .search-section .search-part input:focus {
   border: none;
   outline: none;
+}
+@media screen and (min-width: 2560px) {
+  .search-section h1 {
+    font-size: 220px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .search-section h1 {
+    font-size: 90px;
+  }
+  .search-section .search-part {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .search-section .search-part {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .search-section h1 {
+    font-size: 60px;
+  }
+  .search-section .search-part {
+    width: 95%;
+    height: 30px;
+  }
+  .search-section .search-part input {
+    width: 90%;
+    height: 100%;
+    border: none;
+    font-size: 10px;
+  }
+  .search-part svg {
+    width: 14px;
+    height: 14px;
+  }
 }

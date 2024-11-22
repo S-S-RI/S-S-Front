@@ -1,6 +1,5 @@
 .topbar-section {
   width: 100%;
-  height: 10vh;
   padding: 30px;
   display: flex;
   align-items: center;
@@ -49,4 +48,47 @@
   font-family: Arial, sans-serif;
   font-style: normal;
   font-weight: 500;
+}
+
+@media screen and (max-width: 450px) {
+  .topbar-section .options {
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+  .topbar-section .options .add-doc-btn p {
+    font-size: 12px;
+  }
+  .topbar-section .options .stoplist-words li {
+    font-size: 12px;
+  }
+  .topbar-section .options .stoplist-words li .separator {
+    font-size: 12px;
+  }
+  .topbar-section .options .add-doc-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+  .topbar-section img {
+    width: 50px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .topbar-section .options .add-doc-btn p {
+    font-size: 10px;
+  }
+  .topbar-section .options .stoplist-words li {
+    font-size: 10px;
+  }
+  .topbar-section .options .stoplist-words li .separator {
+    font-size: 10px;
+  }
+  .topbar-section .options .add-doc-btn svg {
+    width: 10px;
+    height: 10px;
+  }
+  .topbar-section img {
+    width: 40px;
+  }
 }

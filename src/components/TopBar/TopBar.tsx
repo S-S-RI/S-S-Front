@@ -29,6 +29,9 @@ const TopBar = () => {
     'will',
     'with',
   ];
+
+  const previewStopWords = stopWords.slice(0, 5);
+
   return (
     <div className="topbar-section">
       <img src={logo} alt="S&S Logo" title="S&S Logo" />
@@ -36,11 +39,14 @@ const TopBar = () => {
         <span className="add-doc-btn" title="Modify Stoplist">
           <Pen /> <p>StopList</p>{' '}
           <ul className="stoplist-words">
-            {stopWords.map((word, index) => (
+            {previewStopWords.map((word, index) => (
               <li key={index} className="stoplist-item">
                 {word}
-                {index < stopWords.length - 1 && (
+                {index < previewStopWords.length - 1 && (
                   <span className="separator"> | </span>
+                )}
+                {index == previewStopWords.length - 1 && (
+                  <span className="separator"> ... </span>
                 )}
               </li>
             ))}
