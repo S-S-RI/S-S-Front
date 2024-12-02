@@ -1,13 +1,14 @@
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import Search from './components/Search/Search';
-import TopBar from './components/TopBar/TopBar';
+import SearchPage from './pages/SearchPage/SearchPage';
+import SearchResultPage from './pages/SearchResultPage/SearchResultPage';
 
 function App() {
   return (
-    <div>
-      <TopBar />
-      <Search />
-    </div>
+    <Routes>
+      <Route path="/" element={<SearchPage />} />
+      <Route path="/result" element={<SearchResultPage />} />
+    </Routes>
   );
 }
 
