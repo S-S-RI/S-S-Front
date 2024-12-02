@@ -1,21 +1,50 @@
 import { SearchIcon } from 'lucide-react';
 import './Search.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 const Search = () => {
-  const [searchValue, SetSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState('');
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+
   const navigate = useNavigate();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    SetSearchValue(e.target.value);
+    setSearchValue(e.target.value);
   };
+
   const handleKeyEvent = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key == 'Enter') {
       handleSubmit();
     }
   };
-  const handleSubmit = () => {
-    navigate(`/search?phrase=${searchValue}`);
+
+  const saveSearch = (search: string) => {
+    const updatedSearches = Array.from(new Set([search, ...suggestions])).slice(
+      0,
+      10
+    );
+    localStorage.setItem('searches', JSON.stringify(updatedSearches));
+    setSuggestions(updatedSearches);
   };
+
+  const handleSubmit = () => {
+    if (searchValue.trim()) {
+      saveSearch(searchValue);
+      navigate(`/search?phrase=${searchValue}`);
+    }
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setSearchValue(suggestion);
+    navigate(`/search?phrase=${suggestion}`);
+  };
+
+  useEffect(() => {
+    const savedSearches = localStorage.getItem('searches');
+    if (savedSearches) {
+      setSuggestions(JSON.parse(savedSearches));
+    }
+  }, []);
   return (
     <div className="search-section">
       <h1>
@@ -28,8 +57,37 @@ const Search = () => {
         <span className="yellow">c</span>
         <span className="blue">h</span>
       </h1>
-      <div className="search-part">
-        <SearchIcon color="#5F5F5F" onClick={handleSubmit} />
+      <div
+        className="search-part"
+        style={{
+          borderBottomLeftRadius:
+            searchValue &&
+            suggestions.some((suggestion) =>
+              suggestion.toLowerCase().includes(searchValue.toLowerCase())
+            )
+              ? 0
+              : '15px',
+          borderBottomRightRadius:
+            searchValue &&
+            suggestions.some((suggestion) =>
+              suggestion.toLowerCase().includes(searchValue.toLowerCase())
+            )
+              ? 0
+              : '15px',
+          boxShadow:
+            searchValue &&
+            suggestions.some((suggestion) =>
+              suggestion.toLowerCase().includes(searchValue.toLowerCase())
+            )
+              ? '0 0px 0px rgba(0, 0, 0, 0.2), 0 0 6px rgba(0, 0, 0, 0.1)'
+              : '0 3px 6px rgba(0, 0, 0, 0.2)',
+        }}
+      >
+        <SearchIcon
+          color="#5F5F5F"
+          onClick={handleSubmit}
+          style={{ cursor: 'pointer' }}
+        />
         <input
           title="write something you want to know more about!"
           type="text"
@@ -38,6 +96,26 @@ const Search = () => {
           onChange={handleChange}
           onKeyDown={handleKeyEvent}
         />
+        {searchValue &&
+          suggestions.filter((suggestion) =>
+            suggestion.toLowerCase().includes(searchValue.toLowerCase())
+          ).length > 0 && (
+            <ul className="suggestions-list">
+              {suggestions
+                .filter((suggestion) =>
+                  suggestion.toLowerCase().includes(searchValue.toLowerCase())
+                )
+                .map((suggestion, index) => (
+                  <li
+                    key={index}
+                    className="suggestion-item"
+                    onClick={() => handleSuggestionClick(suggestion)}
+                  >
+                    {suggestion}
+                  </li>
+                ))}
+            </ul>
+          )}
       </div>
     </div>
   );

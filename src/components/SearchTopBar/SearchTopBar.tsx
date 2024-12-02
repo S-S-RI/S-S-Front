@@ -17,7 +17,7 @@ const SearchTopBar: React.FC<{ phrase: string | null }> = ({ phrase }) => {
         title="S&S Logo"
       />
       <div className="search-part">
-        <SearchIcon color="#5F5F5F" size={16} />
+        <SearchIcon color="#5F5F5F" size={16} style={{ cursor: 'pointer' }} />
         <input
           title="write something you want to know more about!"
           type="text"
@@ -26,7 +26,14 @@ const SearchTopBar: React.FC<{ phrase: string | null }> = ({ phrase }) => {
           onChange={handleInputChange}
         />
 
-        <X color="#5F5F5F" size={16} />
+        <X
+          color="#5F5F5F"
+          size={16}
+          onClick={() => {
+            setSearchValue('');
+          }}
+          style={{ cursor: 'pointer' }}
+        />
       </div>
     </nav>
   );
