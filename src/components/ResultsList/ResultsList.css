@@ -1,0 +1,10 @@
+.result-list {
+  padding-inline: 10%;
+  padding-block: 30px;
+}
+.result-list h3 {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #70757a;
+  font-weight: 400;
+}
