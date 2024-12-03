@@ -1,12 +1,16 @@
 import React from 'react';
 import './ResultItem.css';
-const ResultItem: React.FC<{ name: string; content: string }> = ({
+import { Link } from 'react-router-dom';
+const ResultItem: React.FC<{ _id: string; name: string; content: string }> = ({
+  _id,
   name,
   content,
 }) => {
   return (
     <div className="result-item">
-      <h2>{name}</h2>
+      <Link to={`/document/${_id}`} state={{ name, content }}>
+        <h2>{name}</h2>
+      </Link>
       <p>{content}</p>
     </div>
   );

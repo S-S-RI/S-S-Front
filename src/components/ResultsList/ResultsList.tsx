@@ -7,7 +7,12 @@ const ResultsList: React.FC<{ list: ResultItemType[] }> = ({ list }) => {
     <section className="result-list">
       <h3>Found {list.length} results from more than 400 documents</h3>
       {list.map((item) => (
-        <ResultItem key={item._id} name={item.name} content={item.content} />
+        <ResultItem
+          key={item._id}
+          _id={item._id}
+          name={item.name}
+          content={item.content}
+        />
       ))}
     </section>
   );
