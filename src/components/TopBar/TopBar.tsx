@@ -58,8 +58,8 @@ const TopBar = () => {
             ))}
           </ul>
         </span>
-        <span className="add-doc-btn" title="Modify Docs">
-          <Pen /> <p>Modify Documents</p>
+        <span className="add-doc-btn" title="Add Docs">
+          <Pen /> <p>Add Documents</p>
         </span>
       </div>
     </div>
