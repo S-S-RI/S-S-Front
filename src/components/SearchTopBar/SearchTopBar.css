@@ -15,8 +15,9 @@ nav img {
 }
 
 nav .search-part {
+  position: relative;
   width: 60%;
-  border-radius: 50px;
+  border-radius: 15px;
   height: 60%;
   padding-inline: 14px;
   background-color: white;
@@ -36,6 +37,37 @@ nav .search-part input {
 nav .search-part input:focus {
   border: none;
   outline: none;
+}
+
+nav .suggestions-list {
+  position: absolute;
+  top: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background: white;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+  list-style-type: none;
+  margin: 0;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+nav .suggestion-item {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav .suggestion-item:hover {
+  background-color: #f0f0f0;
+  color: #4285f4; /* Matches your blue theme */
 }
 
 @media screen and (max-width: 1024px) {

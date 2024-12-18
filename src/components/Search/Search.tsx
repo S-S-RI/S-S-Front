@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 const Search = () => {
   const [searchValue, setSearchValue] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,35 +27,13 @@ const Search = () => {
     setSuggestions(updatedSearches);
   };
 
-  const fetchSearchResults = async (phrase: string) => {
-    setIsLoading(true);
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/search`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ phrase: phrase.trim() }),
-      });
-  
-      const data = await response.json();
-      console.log('Backend response:', data);
-      setIsLoading(false);
-  
-      navigate(`/search?phrase=${phrase}`, { state: { searchResults: data } });
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-      setIsLoading(false);
-    }
-  };
-  
   const handleSubmit = () => {
     if (searchValue.trim()) {
       saveSearch(searchValue);
-      fetchSearchResults(searchValue);
+      navigate(`/search?phrase=${searchValue}`);
     }
   };
-  
+
   const handleSuggestionClick = (suggestion: string) => {
     setSearchValue(suggestion);
     navigate(`/search?phrase=${suggestion}`);
@@ -140,13 +117,6 @@ const Search = () => {
                 ))}
             </ul>
           )}
-      
-        {isLoading && (
-          <div className="loading-spinner">
-            <div className="spinner"></div>
-          </div>
-        )}
-
       </div>
     </div>
   );
